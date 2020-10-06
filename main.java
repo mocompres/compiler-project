@@ -74,13 +74,22 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	return null;
     }
 
+	/* -------------------------- command --------------------- */
     public Double visitWhileLoop(implParser.WhileLoopContext ctx){
 	while(visit(ctx.c).equals(1.0)){
 	    visit(ctx.p);
 	}
 	return null;
-    }
-    
+	}
+	
+	public Double visitIfStatement(implParser.IfStatementContext ctx){
+		if(visit(ctx.c).equals(1.0)){
+			visit(ctx.p);
+		}
+		return null;
+	}
+	
+	/* -------------------------- expr --------------------- */
     public Double visitParenthesis(implParser.ParenthesisContext ctx){
 	return visit(ctx.e);
     };
@@ -109,11 +118,64 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	return Double.parseDouble(ctx.c.getText()); 
     };
 
+	/* -------------------------- condition --------------------- */
     public Double visitUnequal(implParser.UnequalContext ctx){
 	Double v1=visit(ctx.e1);
 	Double v2=visit(ctx.e2);
 	if (v1.equals(v2))  return 0.0;
 	else return 1.0;
-    }
+	}
+	
+	public Double visitEqual(implParser.EqualContext ctx){
+		Double v1=visit(ctx.e1);
+		Double v2=visit(ctx.e2);
+		if (v1.equals(v2))  return 1.0;
+		else return 0.0;
+	}
+
+	public Double visitSmallerThan(implParser.SmallerThanContext ctx){
+		Double v1=visit(ctx.e1);
+		Double v2=visit(ctx.e2);
+		if (v1 < v2)  return 1.0;
+		else return 0.0;
+	}
+	
+	
+	public Double visitBiggerThan(implParser.BiggerThanContext ctx){
+		Double v1=visit(ctx.e1);
+		Double v2=visit(ctx.e2);
+		if (v1 > v2)  return 1.0;
+		else return 0.0;
+	}
+
+	public Double visitBiggerEqualThan(implParser.BiggerEqualThanContext ctx){
+		Double v1=visit(ctx.e1);
+		Double v2=visit(ctx.e2);
+		if (v1 <= v2)  return 1.0;
+		else return 0.0;
+	}
+	
+	public Double visitSmallerEqualThan(implParser.SmallerEqualThanContext ctx){
+		Double v1=visit(ctx.e1);
+		Double v2=visit(ctx.e2);
+		if (v1 >= v2)  return 1.0;
+		else return 0.0;
+	}
+
+	
+	public Double visitAnd(implParser.AndContext ctx){
+		Double v1=visit(ctx.e1);
+		Double v2=visit(ctx.e2);
+		if (v1.equals(1.0) && v2.equals(1.0))  return 1.0;
+		else return 0.0;
+	}
+
+	public Double visitOr(implParser.OrContext ctx){
+		Double v1=visit(ctx.e1);
+		Double v2=visit(ctx.e2);
+		if (v1.equals(1.0) || v2.equals(1.0))  return 1.0;
+		else return 0.0;
+	}
+
 }
 
