@@ -1,6 +1,19 @@
 /* Example program for impl that tests many the features required in
 the assignment */
 
+/* Example program for the imperative language impl */
+
+n=5;
+result=1;
+while(n!=0){
+  result=result+n;
+  n=n+(-1);
+}
+
+output result;
+
+
+
 n=49;
 k=6;
 result=1;
