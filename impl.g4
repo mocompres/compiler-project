@@ -15,6 +15,8 @@ command : x=ID '=' e=expr ';'	         # Assignment
 	
 expr	: e1=expr '+' e2=expr # Addition
 	| e1=expr '*' e2=expr # Multiplication
+	| e1=expr '-' e2=expr # Subtraction
+	| e1=expr '/' e2=expr # Division
 	| c=FLOAT     	      # Constant
 	| x=ID		      # Variable
 	| '(' e=expr ')'      # Parenthesis
