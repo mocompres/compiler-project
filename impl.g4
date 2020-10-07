@@ -12,6 +12,8 @@ command : x=ID '=' e=expr ';'	         # Assignment
 	| 'output' e=expr ';'            # Output
         | 'while' '('c=condition')' p=program  # WhileLoop
 		| 'if' '('c=condition')' p=program # IfStatement
+		| 'for' '('x=ID '=' e=expr  '..' e2=expr ')' p=program # ForLoop
+		| x=ID '[' e=expr ']' '=' e1=expr ';' # Array
 	;
 	
 expr	: e1=expr '+' e2=expr # Addition
@@ -19,8 +21,9 @@ expr	: e1=expr '+' e2=expr # Addition
 	| e1=expr '*' e2=expr # Multiplication
 	| e1=expr '/' e2=expr # Division
 	| c=FLOAT     	      # Constant
-	| x=ID		      # Variable
+	| x=ID		     	 # Variable
 	| '(' e=expr ')'      # Parenthesis
+	| a=ID '[' e=expr ']' # ExprArray
 	;
 
 condition : e1=expr '!=' e2=expr # Unequal
