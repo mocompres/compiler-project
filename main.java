@@ -104,7 +104,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	public Double visitArray(implParser.ArrayContext ctx){
 		double s = visit(ctx.e);
 		double v = visit(ctx.e1);
-		env.setVariable("#" + ctx.x.getText()+s,s);
+		env.setVariable("#" + ctx.x.getText()+s,v);
 	
 		return null;
 	}
@@ -112,7 +112,15 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	/* -------------------------- expr --------------------- */
     public Double visitParenthesis(implParser.ParenthesisContext ctx){
 	return visit(ctx.e);
-    };
+	};
+	
+	public Double visitDivision(implParser.DivisionContext ctx){
+		return visit(ctx.e1)/visit(ctx.e2);
+	};
+
+    public Double visitMultiplication(implParser.MultiplicationContext ctx){
+		return visit(ctx.e1)*visit(ctx.e2);
+	};
     
     public Double visitVariable(implParser.VariableContext ctx){
 	return env.getVariable(ctx.x.getText());
@@ -121,17 +129,10 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
     public Double visitAddition(implParser.AdditionContext ctx){
 	return visit(ctx.e1)+visit(ctx.e2);
     };
-
-    public Double visitMultiplication(implParser.MultiplicationContext ctx){
-	return visit(ctx.e1)*visit(ctx.e2);
-	};
+	
 	
 	public Double visitSubtraction(implParser.SubtractionContext ctx){
 		return visit(ctx.e1)-visit(ctx.e2);
-	};
-
-	public Double visitDivision(implParser.DivisionContext ctx){
-		return visit(ctx.e1)/visit(ctx.e2);
 	};
 
     public Double visitConstant(implParser.ConstantContext ctx){
