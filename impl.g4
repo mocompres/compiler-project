@@ -16,7 +16,7 @@ command : x=ID '=' e=expr ';'	         # Assignment
 	| x=ID '[' e=expr ']' '=' e1=expr ';' # Array
 	;
 	 
-expr	:  e1=expr s=GangeDividerOperator e2=expr # GangeDividerOperator 
+expr :  e1=expr s=GangeDividerOperator e2=expr # GangeDividerOperator 
 	| e1=expr s=PlusMinusOperator e2=expr # PlusMinusOperator
 	| c=FLOAT     	      # Constant
 	| x=ID		     	 # Variable
@@ -36,7 +36,8 @@ condition : e1=expr '!=' e2=expr # Unequal
 	| e1=expr '>=' e2=expr # SmallerEqualThan
 	| e1=condition '&&' e2=condition # And
 	| e1=condition '||' e2=condition # Or
-	
+	| '!' c=condition #Not
+	| '(' c=condition ')' # ParenthesisCondition
 	;
 
 ID    : ALPHA (ALPHA|NUM)* ;
