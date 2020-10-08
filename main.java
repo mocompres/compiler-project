@@ -118,22 +118,20 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	return env.getVariable(ctx.x.getText());
     };
     
-    public Double visitAddition(implParser.AdditionContext ctx){
-	return visit(ctx.e1)+visit(ctx.e2);
-    };
+    public Double visitPlusMinusOperator(implParser.PlusMinusOperatorContext ctx){
+		if (ctx.s.getText().equals("+"))
+		return visit(ctx.e1) + visit(ctx.e2);
+	else
+		return visit(ctx.e1) - visit(ctx.e2);
+	};
 
-    public Double visitMultiplication(implParser.MultiplicationContext ctx){
-	return visit(ctx.e1)*visit(ctx.e2);
+    public Double visitGangeDividerOperator(implParser.GangeDividerOperatorContext ctx){
+		if (ctx.s.getText().equals("*"))
+		return visit(ctx.e1) * visit(ctx.e2);
+	else
+		return visit(ctx.e1) / visit(ctx.e2);
 	};
 	
-	public Double visitSubtraction(implParser.SubtractionContext ctx){
-		return visit(ctx.e1)-visit(ctx.e2);
-	};
-
-	public Double visitDivision(implParser.DivisionContext ctx){
-		return visit(ctx.e1)/visit(ctx.e2);
-	};
-
     public Double visitConstant(implParser.ConstantContext ctx){
 	return Double.parseDouble(ctx.c.getText()); 
 	};
