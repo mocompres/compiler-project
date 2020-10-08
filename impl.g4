@@ -10,21 +10,22 @@ program : c=command                      # SingleCommand
 	
 command : x=ID '=' e=expr ';'	         # Assignment
 	| 'output' e=expr ';'            # Output
-        | 'while' '('c=condition')' p=program  # WhileLoop
-		| 'if' '('c=condition')' p=program # IfStatement
-		| 'for' '('x=ID '=' e=expr  '..' e2=expr ')' p=program # ForLoop
-		| x=ID '[' e=expr ']' '=' e1=expr ';' # Array
+    | 'while' '('c=condition')' p=program  # WhileLoop
+	| 'if' '('c=condition')' p=program # IfStatement
+	| 'for' '('x=ID '=' e=expr  '..' e2=expr ')' p=program # ForLoop
+	| x=ID '[' e=expr ']' '=' e1=expr ';' # Array
 	;
 	
-expr	: e1=expr '+' e2=expr # Addition
-	| e1=expr '-' e2=expr # Subtraction
-	| e1=expr '*' e2=expr # Multiplication
-	| e1=expr '/' e2=expr # Division
+expr	: e1=expr s=PlusMinusOperator e2=expr # PlusMinusOperator
+	| e1=expr s=GangeDividerOperator e2=expr # GangeDividerOperator
 	| c=FLOAT     	      # Constant
 	| x=ID		     	 # Variable
 	| '(' e=expr ')'      # Parenthesis
 	| a=ID '[' e=expr ']' # ExprArray
 	;
+
+PlusMinusOperator: ('+'|'-');
+GangeDividerOperator: ('*'|'/'); 
 
 condition : e1=expr '!=' e2=expr # Unequal
 	  // ... extend me 
