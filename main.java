@@ -88,6 +88,26 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		}
 		return null;
 	}
+
+	public Double visitForLoop(implParser.ForLoopContext ctx){
+
+		double v = visit(ctx.e);
+		env.setVariable(ctx.x.getText(),v);
+
+		for (double i = v; i <= visit(ctx.e2); i++) {
+			env.setVariable(ctx.x.getText(),i);
+			visit(ctx.p);
+		}
+		return null;
+	}
+
+	public Double visitArray(implParser.ArrayContext ctx){
+		double s = visit(ctx.e);
+		double v = visit(ctx.e1);
+		env.setVariable("#" + ctx.x.getText()+s,s);
+	
+		return null;
+	}
 	
 	/* -------------------------- expr --------------------- */
     public Double visitParenthesis(implParser.ParenthesisContext ctx){
@@ -116,7 +136,12 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 
     public Double visitConstant(implParser.ConstantContext ctx){
 	return Double.parseDouble(ctx.c.getText()); 
-    };
+	};
+	
+	public Double visitExprArray(implParser.ExprArrayContext ctx){
+		double v = visit(ctx.e);
+		return env.getVariable("#" + ctx.a.getText() + v);
+	};
 
 	/* -------------------------- condition --------------------- */
     public Double visitUnequal(implParser.UnequalContext ctx){
@@ -176,6 +201,5 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		if (v1.equals(1.0) || v2.equals(1.0))  return 1.0;
 		else return 0.0;
 	}
-
 }
 
