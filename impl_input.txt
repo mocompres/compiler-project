@@ -1,3 +1,17 @@
+
+// Testcase 1:
+// Testen fungerer, hvis konsolen printer 21
+output 2+5*3-(3)/3+5;
+
+//Testcase 2:
+//Testen fungerer, hvis konsolen printer 1
+n = 4;
+m = 6;
+
+if(n<=6){
+  output 1;
+}
+
 /*
 n=100;
 a[1] = 1;
