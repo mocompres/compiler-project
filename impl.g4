@@ -15,9 +15,9 @@ command : x=ID '=' e=expr ';'	         # Assignment
 	| 'for' '('x=ID '=' e=expr  '..' e2=expr ')' p=program # ForLoop
 	| x=ID '[' e=expr ']' '=' e1=expr ';' # Array
 	;
-	
-expr	: e1=expr s=PlusMinusOperator e2=expr # PlusMinusOperator
-	| e1=expr s=GangeDividerOperator e2=expr # GangeDividerOperator
+	 
+expr	:  e1=expr s=GangeDividerOperator e2=expr # GangeDividerOperator 
+	| e1=expr s=PlusMinusOperator e2=expr # PlusMinusOperator
 	| c=FLOAT     	      # Constant
 	| x=ID		     	 # Variable
 	| '(' e=expr ')'      # Parenthesis
@@ -36,7 +36,8 @@ condition : e1=expr '!=' e2=expr # Unequal
 	| e1=expr '>=' e2=expr # SmallerEqualThan
 	| e1=condition '&&' e2=condition # And
 	| e1=condition '||' e2=condition # Or
-	;  
+	
+	;
 
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : '-'? NUM+ ('.' NUM+)? ;
