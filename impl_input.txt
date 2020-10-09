@@ -3,8 +3,8 @@
 // Testen fungerer, hvis konsolen printer 21
 output 2+5*3-(3)/3+5;
 
-//Testcase 2:
-//Testen fungerer, hvis konsolen printer 1
+// Testcase 2:
+// Tensten fungerer, hvis konsolen printer 1
 n = 4;
 m = 6;
 
@@ -12,35 +12,57 @@ if(n<=6){
   output 1;
 }
 
-/*
+// Testcase 3:
+// Testen fungerer, hvis konsolen printer 6
+output 10/2+1;
+
+// Testcase 4:
+// Testen fungerer, hvis konsolen printer 30
+output 4+2*3+10*2;
+
+// Testcase 5:
+// Testen fungerer, hvis konsolen printer 38
+output (4+2)*3+10*2;
+
+
+// Testcase 6:
+// Testen fungerer, hvis konsolen printer true
+if (5==2&&1==1||8==8) {
+  output 1;
+}
+
+// Testcase 7:
+// Testen fungerer, hvis konsolen printer false
+if (5==2&&1==1||8==1) {
+  output 2;
+}
+
+// Testcase 8:
+// Testen fungerer, hvis konsolen printer true
+if (!(5==2&&1==1||8==1)) {
+  output 3;
+}
+
+// Testcase 9:
+// Testen fungerer, hvis konsolen printer fra tallet 3 til 101
 n=100;
 a[1] = 1;
 for(i=2..n){
   a[i] = i+1;
   output a[i-1];
-}*/
-
-// 6
-output 10/2+1;
-
-// 30
-output 4+2*3+10*2;
-
-// 38
-output (4+2)*3+10*2;
-
-
-// true
-if (5==2&&1==1||8==8) {
-  output 1;
 }
 
-// false
-if (5==2&&1==1||8==1) {
-  output 2;
+
+// Testcase 10
+// Testen fungerer, hvis resultatet giver 45
+n=10;
+k=2;
+result=1;
+
+while(n!=k && k!=0){
+  result=result*n/k;
+  n=n-(1);
+  k=k-(1);
 }
 
-// true
-if (!(5==2&&1==1||8==1)) {
-  output 3;
-}
+output result;

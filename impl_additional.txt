@@ -12,16 +12,14 @@ while(n!=0){
 
 output result;
 
-
-
 n=49;
 k=6;
 result=1;
 
 while(n!=k && k!=0){
   result=result*n/k;
-  n=n-1;
-  k=k-1;
+  n=n-(1);
+  k=k-(1);
 }
 
 output result;
@@ -42,5 +40,6 @@ for(i=2..n){
     }
   }
 }
+
 
 
